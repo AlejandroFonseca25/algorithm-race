@@ -16,6 +16,10 @@ public class Main extends Application{
 		tournament = new Tournament();
 		tGUI = new TournamentGUI(tournament);
 	}
+	
+	public static void main (String[] args) {
+		launch(args);
+	}
 
 	@Override
 	public void start(Stage stage) throws Exception {

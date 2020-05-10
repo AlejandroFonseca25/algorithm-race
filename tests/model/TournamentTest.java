@@ -42,7 +42,6 @@ public class TournamentTest {
 		long[] n = setup1();
 		tournament.addLinkedListRecursive(n, 0, null);
 		LinkedListItem actual = tournament.getFirst();
-		System.out.println(actual);
 		
 		int i = 0;
 		while (actual != null) {
@@ -66,7 +65,7 @@ public class TournamentTest {
 		
 	}
 	
-	@Test
+	
 	public void searchLinkedListRecursiveTest () {
 		long[] n = setup1();
 		tournament.addLinkedListRecursive(n, 0, null);
@@ -77,6 +76,8 @@ public class TournamentTest {
 		Assertions.assertTrue(tournament.searchLinkedListRecursive(10, actual));
 		Assertions.assertFalse(tournament.searchLinkedListRecursive(13, actual));
 	}
+	
+
 	@Test
 	public void removeSearchLinkedListRecursiveTest () {
 		long[] n = setup1();
@@ -86,24 +87,24 @@ public class TournamentTest {
 		Assertions.assertFalse(tournament.searchLinkedListRecursive(13, actual));
 		Assertions.assertFalse(tournament.removeLinkedListRecursive(13, actual));
 		
-		Assertions.assertTrue(tournament.searchLinkedListRecursive(1, actual));
-		Assertions.assertTrue(tournament.removeLinkedListRecursive(1, actual));
-		Assertions.assertFalse(tournament.searchLinkedListRecursive(1, actual));
+		Assertions.assertTrue(tournament.searchLinkedListRecursive(10, actual));
+		Assertions.assertTrue(tournament.removeLinkedListRecursive(10, actual));
+		Assertions.assertFalse(tournament.searchLinkedListRecursive(10, actual));
 		
 		Assertions.assertTrue(tournament.searchLinkedListRecursive(5, actual));
 		Assertions.assertTrue(tournament.removeLinkedListRecursive(5, actual));
 		Assertions.assertFalse(tournament.searchLinkedListRecursive(5, actual));
 		
-		Assertions.assertTrue(tournament.searchLinkedListRecursive(10, actual));
-		Assertions.assertTrue(tournament.removeLinkedListRecursive(10, actual));
-		Assertions.assertFalse(tournament.searchLinkedListRecursive(10, actual));
+		Assertions.assertTrue(tournament.searchLinkedListRecursive(1, actual));
+		Assertions.assertTrue(tournament.removeLinkedListRecursive(1, actual));
+		actual = tournament.getFirst();
+		Assertions.assertFalse(tournament.searchLinkedListRecursive(1, actual));
 	}
 	
 	@Test
 	public void removeSearchLinkedListIterativeTest () {
 		long[] n = setup1();
 		tournament.addLinkedListRecursive(n, 0, null);
-		LinkedListItem actual = tournament.getFirst();
 		
 		//Linked List
 		Assertions.assertTrue(tournament.searchLinkedListIterative(1));

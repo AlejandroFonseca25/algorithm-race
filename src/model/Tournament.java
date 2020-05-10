@@ -163,7 +163,9 @@ public class Tournament {
 				}
 				//Setting new first
 				if (actual == first) {
-					first = actual.getNext();
+					first.setNext(null);
+					first = next;
+					first.setPrev(null);
 				}
 				removed = true;
 			}
@@ -180,6 +182,7 @@ public class Tournament {
 			if (actual.getNumber() == toRemove) {
 				LinkedListItem prev = actual.getPrev();
 				LinkedListItem next = actual.getNext();
+				
 
 				//Preventing a nullPointer in first item
 				if (prev != null) {
@@ -187,22 +190,27 @@ public class Tournament {
 				}
 				//Preventing a nullPointer in last item
 				if (next != null) {
-					next.setPrev(prev);		
+					next.setPrev(prev);	
 				}
 				//Setting new first
 				if (actual == first) {
+					first.setNext(null);
 					first = next;
 					first.setPrev(null);
 				}
 				removed = true;
 			}
 			else {
-				removed = searchLinkedListRecursive (toRemove, actual.getNext());
+				removed = removeLinkedListRecursive (toRemove, actual.getNext());
 			}
 		}
 		return removed;
 	}
 
+	//Binary three methods
+	public void addBinaryThreeRecursive () {
+		
+	}
 	
 	//Get Methods
 	public ArrayList<Long> getArrayList() {
@@ -215,6 +223,16 @@ public class Tournament {
 
 	public LinkedListItem getFirst() {
 		return first;
+	}
+	
+	public String LinkedListToString () {
+		LinkedListItem actual = first;
+		String toString = "";
+		while (actual != null) {
+			toString += actual.getNumber() + ";";
+			actual = actual.getNext();
+		}
+		return toString;
 	}
 
 	//Set Methods

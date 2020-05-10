@@ -208,8 +208,122 @@ public class Tournament {
 	}
 
 	//Binary three methods
-	public void addBinaryThreeRecursive () {
+	public void addBinaryTreeIterative (long[] q) {
+		for (int i = 0; i < q.length; i++) {
+			TreeItem actual = root;
+			if (root == null) {
+				root = new TreeItem (q[i]);
+			}
+			else {
+				boolean done = false;
+				while (!done) {
+					//Left
+					if (q[i] <= actual.getNumber()) {
+						if (actual.getLeft() == null) {
+							actual.setLeft(new TreeItem(q[i]));
+							actual.getLeft().setFather(actual);
+							done = true;
+						}
+						else {
+							actual = actual.getLeft();
+						}
+					}
+					//Right
+					else {
+						if (actual.getRight() == null) {
+							actual.setRight(new TreeItem(q[i]));
+							actual.getRight().setFather(actual);
+							done = true;
+						}
+						else {
+							actual = actual.getRight();
+						}					
+					}
+				}
+			}
+		}
+	}
+	
+	public void addBinaryTreeRecursive (long[] q, int index, TreeItem actual) {
+		if (index < q.length) {
+			if (root == null) {
+				root = new TreeItem (q[index]);
+				addBinaryTreeRecursive (q, index + 1, root);
+			}
+			else {
+				//Left
+				if (q[index] <= actual.getNumber()) {
+					if (actual.getLeft() == null) {
+						actual.setLeft(new TreeItem(q[index]));
+						actual.getLeft().setFather(actual);
+						addBinaryTreeRecursive (q, index + 1, root);
+					}
+					else {
+						addBinaryTreeRecursive (q, index, actual.getLeft());
+					}
+				}
+				//Right
+				else {
+					if (actual.getRight() == null) {
+						actual.setRight(new TreeItem(q[index]));
+						actual.getRight().setFather(actual);
+						addBinaryTreeRecursive (q, index + 1, root);
+					}
+					else {
+						addBinaryTreeRecursive (q, index, actual.getRight());
+					}					
+				}
+			}
+		}
+	}
+	public boolean searchBinaryTreeIterative (long toSearch) {
+		boolean found = false;
+		TreeItem actual = root;
+		while (actual != null && !found) {
+			if (toSearch == actual.getNumber()) {
+				found = true;
+			}
+			else if (toSearch < actual.getNumber()) {
+				actual = actual.getLeft();
+			}
+			else {
+				actual = actual.getRight();
+			}
+		}
+		return found;
+	}
+
+	public boolean searchBinaryTreeRecursive (long toSearch, TreeItem actual) {
+		boolean found = false;
+		if (actual.getNumber() == toSearch) {
+			found = true;
+		}
+		else if (toSearch < actual.getNumber()) {
+			if (actual.getLeft()!=null) {
+				found = searchBinaryTreeRecursive (toSearch, actual.getLeft());
+			}
+		}
+		else {
+			if (actual.getRight() != null) {
+				found = searchBinaryTreeRecursive (toSearch, actual.getRight());
+			}
+		}
+		return found;
+	}
+	
+	public String toStringBinaryTreePostorder (TreeItem actual, String temp) {
 		
+        String toString = temp;
+        
+        if (actual.getLeft() != null) {
+        	toString = toStringBinaryTreePostorder(actual.getLeft(), toString);  
+        }
+        
+        if (actual.getRight() != null) {
+        	toString = toStringBinaryTreePostorder(actual.getRight(), toString);  
+        }
+        
+        return toString += actual.getNumber() + " ";  
 	}
 	
 	//Get Methods

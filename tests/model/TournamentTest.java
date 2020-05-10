@@ -18,11 +18,7 @@ public class TournamentTest {
 		return n;
 	}
 	
-	@Test
-	public void generateRandomNumbersTest() {
-		long[] numbers = tournament.generateRandomNumbers(10);
-	}
-	
+	//Linked List Tests
 	@Test
 	public void addLinkedListIterativeTest () {
 		long[] n = setup1();
@@ -54,8 +50,7 @@ public class TournamentTest {
 	@Test
 	public void searchLinkedListIterativeTest () {
 		long[] n = setup1();
-		tournament.addLinkedListRecursive(n, 0, null);
-		LinkedListItem actual = tournament.getFirst();
+		tournament.addLinkedListIterative(n);
 		
 		//Linked List 
 		Assertions.assertTrue(tournament.searchLinkedListIterative(1));
@@ -77,9 +72,30 @@ public class TournamentTest {
 		Assertions.assertFalse(tournament.searchLinkedListRecursive(13, actual));
 	}
 	
-
 	@Test
-	public void removeSearchLinkedListRecursiveTest () {
+	public void removeLinkedListIterativeTest () {
+		long[] n = setup1();
+		tournament.addLinkedListRecursive(n, 0, null);
+		
+		//Linked List
+		Assertions.assertTrue(tournament.searchLinkedListIterative(1));
+		Assertions.assertTrue(tournament.removeLinkedListIterative(1));
+		Assertions.assertFalse(tournament.searchLinkedListIterative(1));
+		
+		Assertions.assertTrue(tournament.searchLinkedListIterative(5));
+		Assertions.assertTrue(tournament.removeLinkedListIterative(5));
+		Assertions.assertFalse(tournament.searchLinkedListIterative(5));
+		
+		Assertions.assertTrue(tournament.searchLinkedListIterative(10));
+		Assertions.assertTrue(tournament.removeLinkedListIterative(10));
+		Assertions.assertFalse(tournament.searchLinkedListIterative(10));
+		
+		Assertions.assertFalse(tournament.removeLinkedListIterative(13));
+		Assertions.assertFalse(tournament.searchLinkedListIterative(13));
+	}
+	
+	@Test
+	public void removeLinkedListRecursiveTest () {
 		long[] n = setup1();
 		tournament.addLinkedListRecursive(n, 0, null);
 		LinkedListItem actual = tournament.getFirst();
@@ -101,25 +117,29 @@ public class TournamentTest {
 		Assertions.assertFalse(tournament.searchLinkedListRecursive(1, actual));
 	}
 	
+	//Binary Tree tests
+	
 	@Test
-	public void removeSearchLinkedListIterativeTest () {
+	public void searchAndAddBinaryTreeRecursiveTest () {
 		long[] n = setup1();
-		tournament.addLinkedListRecursive(n, 0, null);
+		tournament.addBinaryTreeRecursive(n, 0, null);
+		TreeItem root = tournament.getRoot();
 		
-		//Linked List
-		Assertions.assertTrue(tournament.searchLinkedListIterative(1));
-		Assertions.assertTrue(tournament.removeLinkedListIterative(1));
-		Assertions.assertFalse(tournament.searchLinkedListIterative(1));
+		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(1, root));
+		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(5, root));
+		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(10, root));
+		Assertions.assertFalse(tournament.searchBinaryTreeRecursive(13, root));
+	}
+
+	
+	@Test
+	public void addBinaryTreeRecursiveTest () {
+		long[] n = setup1();
+		tournament.addBinaryTreeIterative(n);
 		
-		Assertions.assertTrue(tournament.searchLinkedListIterative(5));
-		Assertions.assertTrue(tournament.removeLinkedListIterative(5));
-		Assertions.assertFalse(tournament.searchLinkedListIterative(5));
-		
-		Assertions.assertTrue(tournament.searchLinkedListIterative(10));
-		Assertions.assertTrue(tournament.removeLinkedListIterative(10));
-		Assertions.assertFalse(tournament.searchLinkedListIterative(10));
-		
-		Assertions.assertFalse(tournament.removeLinkedListIterative(13));
-		Assertions.assertFalse(tournament.searchLinkedListIterative(13));
+		Assertions.assertTrue(tournament.searchBinaryTreeIterative(1));
+		Assertions.assertTrue(tournament.searchBinaryTreeIterative(5));
+		Assertions.assertTrue(tournament.searchBinaryTreeIterative(10));
+		Assertions.assertFalse(tournament.searchBinaryTreeIterative(13));
 	}
 }

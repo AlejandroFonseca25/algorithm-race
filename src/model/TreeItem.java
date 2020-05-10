@@ -5,6 +5,7 @@ public class TreeItem {
 	private long number;
 	private TreeItem left;
 	private TreeItem right;
+	private TreeItem father;
 	
 	public TreeItem (long n) {
 		number = n;
@@ -24,6 +25,10 @@ public class TreeItem {
 		return right;
 	}
 
+	public TreeItem getFather() {
+		return father;
+	}
+
 	public void setNumber(long number) {
 		this.number = number;
 	}
@@ -34,5 +39,9 @@ public class TreeItem {
 
 	public void setRight(TreeItem right) {
 		this.right = right;
+	}
+
+	public void setFather(TreeItem father) {
+		this.father = father;
 	}
 }

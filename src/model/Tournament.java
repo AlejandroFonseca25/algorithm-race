@@ -276,6 +276,7 @@ public class Tournament {
 			}
 		}
 	}
+	
 	public boolean searchBinaryTreeIterative (long toSearch) {
 		boolean found = false;
 		TreeItem actual = root;
@@ -309,6 +310,154 @@ public class Tournament {
 			}
 		}
 		return found;
+	}
+	
+	public boolean removeBinaryTreeIterative (long toRemove) {
+		boolean removed = false;
+		TreeItem actual = root;
+		while (actual != null && !removed) {
+			if (actual.getNumber() == toRemove) {
+				//If it has two children
+				if (actual.getLeft() != null && actual.getRight() != null) {
+					removeBinaryTreeTwoChildren (actual);
+				}
+				//If it has 1 children
+				else if (actual.getLeft() != null || actual.getRight() != null) {
+					removeBinaryTreeOneChild (actual);
+				}
+				//If it doesn't have children
+				else if (actual.getLeft() == null && actual.getRight() == null) {
+					removeBinaryTreeNoChildren (actual);
+				}
+				removed = true;
+			}
+			else if (toRemove < actual.getNumber()) {
+				actual = actual.getLeft();
+			}
+			else {
+				actual = actual.getRight();
+			}
+		}
+		return removed;
+	}
+
+	public boolean removeBinaryTreeRecursive (long toRemove, TreeItem actual) {
+		boolean removed = false;
+		if (actual.getNumber() == toRemove) {
+			//If it has two children
+			if (actual.getLeft() != null && actual.getRight() != null) {
+				removeBinaryTreeTwoChildren (actual);
+			}
+			//If it has 1 children
+			else if (actual.getLeft() != null || actual.getRight() != null){
+				removeBinaryTreeOneChild (actual);
+			}
+			//If it doesn't have children
+			else if (actual.getLeft() == null && actual.getRight() == null) {
+				removeBinaryTreeNoChildren (actual);
+			}
+			removed = true;
+		}
+		else if (toRemove < actual.getNumber()) {
+			if (actual.getLeft() != null) {
+				removed = removeBinaryTreeRecursive (toRemove, actual.getLeft());
+			}
+		}
+		else {
+			if (actual.getRight() != null) {
+				removed = removeBinaryTreeRecursive (toRemove, actual.getRight());
+			}
+		}
+		return removed;
+	}
+	
+	private void removeBinaryTreeNoChildren (TreeItem goner) {
+		if (goner != root) {
+			TreeItem father = goner.getFather();
+
+			if (father.getLeft() == goner) {
+				father.setLeft(null);
+			}
+			else {
+				father.setRight(null);
+			}
+		}
+		else {
+			root = null;
+		}
+	}
+	private void removeBinaryTreeOneChild (TreeItem goner) {
+		TreeItem child;
+		if (goner.getLeft() != null) {
+			child = goner.getLeft();
+		}
+		else {
+			child = goner.getRight();
+		}
+
+		if (goner != root) {
+			TreeItem father = goner.getFather();
+			child.setFather(father);
+			
+			if (father.getLeft() == goner) {
+				father.setLeft(child);
+			}
+			else {
+				father.setRight(child);
+			}
+		}
+		else {
+			root = child;
+		}
+	}
+	
+	private void removeBinaryTreeTwoChildren (TreeItem goner) {
+		TreeItem minor = searchMinor (goner);
+		
+			//Minor has no child
+			if (minor.getRight() == null) {
+				removeBinaryTreeNoChildren(minor);
+			}
+			//Minor has a child
+			else {
+				removeBinaryTreeOneChild(minor);
+			}
+			//New references to minor
+			TreeItem leftChild = goner.getLeft();
+			TreeItem rightChild = goner.getRight();
+			TreeItem father = goner.getFather();
+			
+			minor.setLeft(leftChild);
+			minor.setRight(rightChild);
+			minor.setFather(father);
+			//References around minor 
+			if (leftChild != null) {
+				leftChild.setFather(minor);
+			}
+			
+			if (rightChild != null) {
+				rightChild.setFather(minor);
+			}
+
+			if(goner != root && goner == father.getLeft()) {
+				father.setLeft(minor);
+			}
+			else if (goner != root) {
+				father.setRight(minor);
+			}
+			if (goner == root) {
+				root = minor;
+			}
+	}
+	
+	private TreeItem searchMinor(TreeItem father) {
+		TreeItem minor = father.getRight();
+		
+		while (minor.getLeft() != null) {
+			
+			minor = minor.getLeft();	
+		}
+		return minor;
 	}
 	
 	public String toStringBinaryTreePostorder (TreeItem actual, String temp) {

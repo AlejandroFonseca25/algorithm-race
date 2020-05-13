@@ -23,12 +23,12 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FALTA LA VENTANA"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-pane.fxml"));
 		fxmlLoader.setController(tGUI);
 		Parent root = fxmlLoader.load();
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
-		stage.setTitle("ALGORITHM RACE TOURNAMENT");
+		stage.setTitle("Algoritmh Race : The Tournament");
 		stage.show();
 	}
 	

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url('file:images\checkeredBg.jpeg');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="13.0" layoutY="14.0" text="「Algorithm Race : The Tournament」" textFill="#ffc70d">
+         <font>
+            <Font name="Maiandra GD" size="36.0" />
+         </font>
+      </Label>
+      <VBox layoutX="13.0" layoutY="82.0" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: #000000; -fx-background-color: #E7E7E7;">
+         <children>
+            <Label text="Elements' number">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <TextField fx:id="boxElementNo" />
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="173.0" prefHeight="115.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: #000000; -fx-background-color: #E7E7E7;">
+         <children>
+            <Label alignment="TOP_CENTER" prefWidth="200.0" text="Category">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <RadioButton fx:id="radIterative" mnemonicParsing="false" prefWidth="120.0" selected="true" text="Iterative">
+               <font>
+                  <Font name="Maiandra GD" size="20.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <toggleGroup>
+                  <ToggleGroup fx:id="groupCategory" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radRecursive" mnemonicParsing="false" prefWidth="120.0" text="Recursive" toggleGroup="$groupCategory">
+               <font>
+                  <Font name="Maiandra GD" size="20.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </RadioButton>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="225.0" layoutY="82.0" prefHeight="206.0" prefWidth="150.0" spacing="25.0" style="-fx-border-color: #000000; -fx-background-color: #E7E7E7;">
+         <children>
+            <Label alignment="TOP_CENTER" prefWidth="200.0" text="Race Type">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <RadioButton fx:id="radAdd" mnemonicParsing="false" prefWidth="120.0" selected="true" text="Add">
+               <font>
+                  <Font name="Maiandra GD" size="20.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <toggleGroup>
+                  <ToggleGroup fx:id="groupType" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="radSearch" mnemonicParsing="false" prefWidth="120.0" text="Search" toggleGroup="$groupType">
+               <font>
+                  <Font name="Maiandra GD" size="20.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </RadioButton>
+            <RadioButton fx:id="radRemove" mnemonicParsing="false" prefWidth="120.0" text="Remove" toggleGroup="$groupType">
+               <font>
+                  <Font name="Maiandra GD" size="20.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </RadioButton>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="387.0" layoutY="82.0" prefHeight="206.0" prefWidth="204.0" spacing="25.0" style="-fx-border-color: #ffc70d; -fx-background-color: #FFF0D2;">
+         <children>
+            <Label alignment="CENTER" prefWidth="200.0" text="Win count">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ff0fbb" />
+                        <Stop color="#36ffde" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="115.0" text="Team Tree" textFill="#34c931">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/teamTree.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="winTeamTree" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="59.0" text="0" textFill="#ff9e0f">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="102.0" text="Team List" textFill="#ff0f0f">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/teamList.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="winTeamList" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="76.0" text="0" textFill="#ff9e0f">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="167.0" text="Team Array" textFill="#0fbeff">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/teamArray.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="winTeamArray" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="75.0" text="0" textFill="#ff9e0f">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="274.0" layoutY="328.0" mnemonicParsing="false" onAction="#loadRacePane" text="Go!">
+         <font>
+            <Font name="Maiandra GD" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="335.0" layoutY="328.0" mnemonicParsing="false" onAction="#loadHelpPane" text="Help">
+         <font>
+            <Font name="Maiandra GD" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="551.0" layoutY="359.0" mnemonicParsing="false" onAction="#musicManager" prefHeight="25.0" prefWidth="18.0">
+         <graphic>
+            <ImageView fx:id="buttonMusic" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/unmuteIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</Pane>

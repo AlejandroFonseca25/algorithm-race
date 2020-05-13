@@ -15,7 +15,13 @@ public class CircleThread extends Thread{
 	}
 
 	public void run () {
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
 
+			e1.printStackTrace();
+		}
 		while (true) {
 			am.circleAnimation();
 

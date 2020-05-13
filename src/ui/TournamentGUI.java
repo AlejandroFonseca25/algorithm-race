@@ -129,12 +129,11 @@ public class TournamentGUI {
     	animationManager = new AnimationManager (circles, null, timerUnits);
     	CircleThread ct = new CircleThread(animationManager, this);
     	ct.setDaemon(true);
-    	ct.start();
     	
-
     	TimerThread tt = new TimerThread (animationManager, this);
     	tt.setDaemon(true);
     	tt.start();
+    	ct.start();
     }
 
     @FXML

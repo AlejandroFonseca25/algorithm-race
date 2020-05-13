@@ -16,23 +16,13 @@ public class Tournament {
 	}
 	
 	//The real deal
-	public long[] generateRandomNumbers (int q) {
-		Random r = new Random();
-		long seed = r.nextLong();
-		r.setSeed(seed);
-		
-		long[] numbers = new long[q];
-		for (int i = 0; i < q; i++) {
-			numbers[i] = r.nextLong();
-		}
-		return numbers;
+	public long generateRandomLong (Random r) {
+		return r.nextLong();
 	}
 	
 	//ArrayList methods
-	public void addArrayList(long[] n) {
-		for (int i = 0; i < n.length; i++) {
-			arrayList.add(new Long(n[i]));
-		}
+	public void addArrayList(long n) {
+			arrayList.add(new Long(n));
 	}
 	
 	public boolean searchArrayListIterative(long toSearch) {
@@ -51,8 +41,8 @@ public class Tournament {
 			found = true;
 		}
 		
-		else if (index != 0) {
-			found = searchArrayListRecursive(toSearch, index - 1);
+		else if (index < arrayList.size() - 1) {
+			found = searchArrayListRecursive(toSearch, index + 1);
 		}
 		return found;
 	}
@@ -70,53 +60,55 @@ public class Tournament {
 	
 	public boolean removeArrayListRecursive(long toSearch, int index) {
 		boolean removed = false;
-		if (arrayList.get(index) == toSearch) {
-			arrayList.remove(index);
-			removed = true;
-		}
-		
-		else if (index != 0) {
-			removed = searchArrayListRecursive(toSearch, index - 1);
+		if (index < arrayList.size()) {
+			if (arrayList.get(index) == toSearch) {
+				arrayList.remove(index);
+				removed = true;
+			}
+
+			else {
+				removed = removeArrayListRecursive(toSearch, index + 1);
+			}
 		}
 		return removed;
 	}
 	
 	//Linked List methods
-	public void addLinkedListIterative (long[] q) {
-		for (int i = 0; i < q.length; i++) {
-			LinkedListItem toAdd = new LinkedListItem(q[i]);
-			
-			if (first == null) {
-				first = toAdd;
-			}
-			else {
-				LinkedListItem actual = first;
-				//Goes to the last item
-				while (actual.getNext() != null) {
-					actual = actual.getNext();
-				}
-				toAdd.setPrev(actual);
-				actual.setNext(toAdd);
+	public void addLinkedListIterative (long q) {
+		LinkedListItem toAdd = new LinkedListItem(q);
 
+		if (first == null) {
+			first = toAdd;
+		}
+		else {
+			LinkedListItem actual = first;
+			//Goes to the last item
+			while (actual.getNext() != null) {
+				actual = actual.getNext();
 			}
+			toAdd.setPrev(actual);
+			actual.setNext(toAdd);
+
 		}
 	}
 
-	public void addLinkedListRecursive (long[] q, int index, LinkedListItem actual) {
-		if (index < q.length) {
-			LinkedListItem toAdd = new LinkedListItem(q[index]);
-			if (first == null) {
-				first = toAdd;
-			}
-			
-			else {
-				toAdd.setPrev(actual);
-				actual.setNext(toAdd);
-			}
-			addLinkedListRecursive (q, index + 1, toAdd);
+
+	public void addLinkedListRecursive (long q, LinkedListItem actual) {
+		LinkedListItem toAdd = new LinkedListItem(q);
+		if (first == null) {
+			first = toAdd;
+		}
+
+		else if (actual.getNext() == null){
+			toAdd.setPrev(actual);
+			actual.setNext(toAdd);
+
+		}
+		else {
+			addLinkedListRecursive (q, toAdd);
 		}
 	}
-	
+
 	public boolean searchLinkedListIterative (long toSearch) {
 		boolean found = false;
 		LinkedListItem actual = first;
@@ -208,75 +200,70 @@ public class Tournament {
 	}
 
 	//Binary three methods
-	public void addBinaryTreeIterative (long[] q) {
-		for (int i = 0; i < q.length; i++) {
-			TreeItem actual = root;
-			if (root == null) {
-				root = new TreeItem (q[i]);
-			}
-			else {
-				boolean done = false;
-				while (!done) {
-					//Left
-					if (q[i] <= actual.getNumber()) {
-						if (actual.getLeft() == null) {
-							actual.setLeft(new TreeItem(q[i]));
-							actual.getLeft().setFather(actual);
-							done = true;
-						}
-						else {
-							actual = actual.getLeft();
-						}
-					}
-					//Right
-					else {
-						if (actual.getRight() == null) {
-							actual.setRight(new TreeItem(q[i]));
-							actual.getRight().setFather(actual);
-							done = true;
-						}
-						else {
-							actual = actual.getRight();
-						}					
-					}
-				}
-			}
+	public void addBinaryTreeIterative (long n) {
+
+		TreeItem actual = root;
+		if (root == null) {
+			root = new TreeItem (n);
 		}
-	}
-	
-	public void addBinaryTreeRecursive (long[] q, int index, TreeItem actual) {
-		if (index < q.length) {
-			if (root == null) {
-				root = new TreeItem (q[index]);
-				addBinaryTreeRecursive (q, index + 1, root);
-			}
-			else {
+		else {
+			boolean done = false;
+			while (!done) {
 				//Left
-				if (q[index] <= actual.getNumber()) {
+				if (n <= actual.getNumber()) {
 					if (actual.getLeft() == null) {
-						actual.setLeft(new TreeItem(q[index]));
+						actual.setLeft(new TreeItem(n));
 						actual.getLeft().setFather(actual);
-						addBinaryTreeRecursive (q, index + 1, root);
+						done = true;
 					}
 					else {
-						addBinaryTreeRecursive (q, index, actual.getLeft());
+						actual = actual.getLeft();
 					}
 				}
 				//Right
 				else {
 					if (actual.getRight() == null) {
-						actual.setRight(new TreeItem(q[index]));
+						actual.setRight(new TreeItem(n));
 						actual.getRight().setFather(actual);
-						addBinaryTreeRecursive (q, index + 1, root);
+						done = true;
 					}
 					else {
-						addBinaryTreeRecursive (q, index, actual.getRight());
+						actual = actual.getRight();
 					}					
 				}
 			}
 		}
+
 	}
-	
+
+	public void addBinaryTreeRecursive (long n, TreeItem actual) {
+		if (root == null) {
+			root = new TreeItem (n);
+		}
+		else {
+			//Left
+			if (n <= actual.getNumber()) {
+				if (actual.getLeft() == null) {
+					actual.setLeft(new TreeItem(n));
+					actual.getLeft().setFather(actual);
+				}
+				else {
+					addBinaryTreeRecursive (n, actual.getLeft());
+				}
+			}
+			//Right
+			else {
+				if (actual.getRight() == null) {
+					actual.setRight(new TreeItem(n));
+					actual.getRight().setFather(actual);
+				}
+				else {
+					addBinaryTreeRecursive (n, actual.getRight());
+				}					
+			}
+		}
+	}
+
 	public boolean searchBinaryTreeIterative (long toSearch) {
 		boolean found = false;
 		TreeItem actual = root;

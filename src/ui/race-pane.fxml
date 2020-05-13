@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="racePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Circle fx:id="circle1" fill="#ff7f001c" layoutX="546.0" layoutY="54.0" radius="40.0" stroke="#ff6300" strokeType="INSIDE" />
+      <Circle fx:id="circle0" fill="#b22bff26" layoutX="546.0" layoutY="54.0" radius="20.0" stroke="#c814ff" strokeType="INSIDE" />
+      <VBox layoutX="167.0" layoutY="142.0" prefHeight="200.0" prefWidth="400.0" spacing="80.0">
+         <children>
+            <ProgressBar fx:id="progBarTree" prefHeight="18.0" prefWidth="400.0" progress="0.0" style="-fx-accent: #34c931;" />
+            <ProgressBar fx:id="progBarList" prefWidth="400.0" progress="0.0" style="-fx-accent: #ff0f0f;" />
+            <ProgressBar fx:id="progBarArray" prefWidth="400.0" progress="0.0" style="-fx-accent: #0fbeff;" />
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="60.0" prefWidth="170.0">
+         <children>
+            <Label text="Time">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ffad3b" offset="0.007662835249042145" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Label fx:id="timer" text="00:00:00:00">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ffad3b" offset="0.007662835249042145" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="123.0" prefHeight="60.0" prefWidth="136.0">
+         <children>
+            <Label text="Team tree" textFill="#34c931">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="timer1" text="--:--:--:--">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ffad3b" offset="0.007662835249042145" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="219.0" prefHeight="60.0" prefWidth="136.0">
+         <children>
+            <Label text="Team list" textFill="#ff0f0f">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="timer11" text="--:--:--:--">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ffad3b" offset="0.007662835249042145" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="317.0" prefHeight="60.0" prefWidth="136.0">
+         <children>
+            <Label text="Team array" textFill="#0fbeff">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="timer111" text="--:--:--:--">
+               <font>
+                  <Font name="Maiandra GD" size="24.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                     <stops>
+                        <Stop color="#ffad3b" />
+                        <Stop color="#ffad3b" offset="0.007662835249042145" />
+                        <Stop color="#ff550f" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</Pane>

@@ -21,7 +21,7 @@
             <Font name="Maiandra GD" size="36.0" />
          </font>
       </Label>
-      <VBox layoutX="13.0" layoutY="82.0" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: #000000; -fx-background-color: #E7E7E7;">
+      <VBox layoutX="13.0" layoutY="82.0" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: #ffad3b; -fx-background-color: #E7E7E7;">
          <children>
             <Label text="Elements' number">
                <font>
@@ -39,7 +39,7 @@
             <TextField fx:id="boxElementNo" />
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="173.0" prefHeight="115.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: #000000; -fx-background-color: #E7E7E7;">
+      <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="173.0" prefHeight="115.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: #ffad3b; -fx-background-color: #E7E7E7;">
          <children>
             <Label alignment="TOP_CENTER" prefWidth="200.0" text="Category">
                <font>
@@ -85,7 +85,7 @@
             </RadioButton>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="225.0" layoutY="82.0" prefHeight="206.0" prefWidth="150.0" spacing="25.0" style="-fx-border-color: #000000; -fx-background-color: #E7E7E7;">
+      <VBox alignment="TOP_CENTER" layoutX="225.0" layoutY="82.0" prefHeight="206.0" prefWidth="150.0" spacing="25.0" style="-fx-border-color: #ffad3b; -fx-background-color: #E7E7E7;">
          <children>
             <Label alignment="TOP_CENTER" prefWidth="200.0" text="Race Type">
                <font>
@@ -161,16 +161,16 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="115.0" text="Team Tree" textFill="#34c931">
-                     <font>
-                        <Font name="Maiandra GD" size="24.0" />
-                     </font>
-                  </Label>
                   <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/teamTree.png" />
                      </image>
                   </ImageView>
+                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="115.0" text="Team Tree" textFill="#34c931">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
                   <Label fx:id="winTeamTree" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="59.0" text="0" textFill="#ff9e0f">
                      <font>
                         <Font name="Maiandra GD" size="24.0" />
@@ -180,16 +180,16 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="102.0" text="Team List" textFill="#ff0f0f">
-                     <font>
-                        <Font name="Maiandra GD" size="24.0" />
-                     </font>
-                  </Label>
                   <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/teamList.png" />
                      </image>
                   </ImageView>
+                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="102.0" text="Team List" textFill="#ff0f0f">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
                   <Label fx:id="winTeamList" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="76.0" text="0" textFill="#ff9e0f">
                      <font>
                         <Font name="Maiandra GD" size="24.0" />
@@ -199,16 +199,16 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="167.0" text="Team Array" textFill="#0fbeff">
-                     <font>
-                        <Font name="Maiandra GD" size="24.0" />
-                     </font>
-                  </Label>
                   <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/teamArray.png" />
                      </image>
                   </ImageView>
+                  <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="167.0" text="Team Array" textFill="#0fbeff">
+                     <font>
+                        <Font name="Maiandra GD" size="24.0" />
+                     </font>
+                  </Label>
                   <Label fx:id="winTeamArray" alignment="TOP_RIGHT" prefHeight="29.0" prefWidth="75.0" text="0" textFill="#ff9e0f">
                      <font>
                         <Font name="Maiandra GD" size="24.0" />

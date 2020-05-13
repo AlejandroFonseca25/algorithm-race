@@ -30,6 +30,7 @@ public class Main extends Application{
 		stage.setScene(scene);
 		stage.setTitle("Algoritmh Race : The Tournament");
 		stage.show();
+		tGUI.loadMenuPane(null);
 	}
 	
 	

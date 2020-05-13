@@ -1,5 +1,5 @@
 package threads;
 
-public class ProgressBarThread {
-
+public class ProgressBarThread extends Thread{
+	
 }

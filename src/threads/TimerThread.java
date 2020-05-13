@@ -4,30 +4,30 @@ import javafx.application.Platform;
 import model.AnimationManager;
 import ui.TournamentGUI;
 
-public class CircleThread extends Thread{
+public class TimerThread extends Thread{
 	
 	private AnimationManager am;
 	private TournamentGUI t;
 	
-	public CircleThread (AnimationManager am, TournamentGUI t) {
+	public TimerThread (AnimationManager am, TournamentGUI t) {
 		this.am = am;
 		this.t = t;
 	}
-
+	
 	public void run () {
 
 		while (true) {
-			am.circleAnimation();
+			am.timerAnimation();
 
 			Platform.runLater(new Thread() {
 
 				public void run () {
-					t.updateTimer();
+					t.updateCircles();
 				}
 			});
 
 			try {
-				Thread.sleep(25);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

@@ -30,81 +30,86 @@ public class TreeThread extends Thread{
 	
 	@Override
 	public void run () {
-		switch (category) {
-		//Iterative
-		case 0:
-			//Add
-			if (mode == 0) {
-				
-				for (int i = 0; i < elements; i++) {
-					long n = tournament.generateRandomLong(r);
-					tournament.addBinaryTreeIterative(n);
-				}
-			}
-			//Search
-			else if (mode == 1) {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.searchBinaryTreeIterative(n);
-				}
-			}
-			//Remove
-			else {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.removeBinaryTreeIterative(n);
-				}
-			}
-			break;
-		//Recursive
-		case 1:
-			//Add
-			if (mode == 0) {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.addBinaryTreeRecursive(n,tournament.getRoot());
-				}
-			}
-			
-			//Search
-			else if (mode == 1) {
-				for (int i = 0; i < elements; i++) {
-
-					long n = tournament.generateRandomLong(r);
-					tournament.searchBinaryTreeRecursive(n,tournament.getRoot());
-				}
-			}
-			
-			//Remove
-			else {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.removeBinaryTreeRecursive(n,tournament.getRoot());
-				}
-			}
-			break;
-		}
-		
-		Platform.runLater(new Thread() {
-
-			public void run () {
-				tournamentGUI.updateFinalTreeTime();
-			}
-		});
-		
 		try {
+			switch (category) {
+			//Iterative
+			case 0:
+				//Add
+				if (mode == 0) {
+
+					for (int i = 0; i < elements; i++) {
+						long n = tournament.generateRandomLong(r);
+						tournament.addBinaryTreeIterative(n);
+					}
+				}
+				//Search
+				else if (mode == 1) {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.searchBinaryTreeIterative(n);
+					}
+				}
+				//Remove
+				else {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.removeBinaryTreeIterative(n);
+					}
+				}
+				break;
+				//Recursive
+			case 1:
+				//Add
+				if (mode == 0) {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.addBinaryTreeRecursive(n,tournament.getRoot());
+					}
+				}
+
+				//Search
+				else if (mode == 1) {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.searchBinaryTreeRecursive(n,tournament.getRoot());
+					}
+				}
+
+				//Remove
+				else {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.removeBinaryTreeRecursive(n,tournament.getRoot());
+					}
+				}
+				break;
+			}
+
+			Platform.runLater(new Thread() {
+
+				public void run () {
+					tournamentGUI.updateFinalTreeTime();
+				}
+			});
+
 			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (StackOverflowError soe) {
-			tournamentGUI.getTreeTimer().setText("DISQUALIFIED");
+			Platform.runLater(new Thread() {
+
+				public void run () {
+					tournamentGUI.getTreeTimer().setText("DISQUALIFIED");
+				}
+			});
 		}
 	}
-	
+
 	public int getCategory() {
 		return category;
 	}

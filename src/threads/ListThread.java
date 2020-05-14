@@ -30,78 +30,84 @@ public class ListThread extends Thread{
 	
 	@Override
 	public void run () {
-		switch (category) {
-		//Iterative
-		case 0:
-			//Add
-			if (mode == 0) {
-				
-				for (int i = 0; i < elements; i++) {
-					long n = tournament.generateRandomLong(r);
-					tournament.addLinkedListIterative(n);
-				}
-			}
-			//Search
-			else if (mode == 1) {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.searchLinkedListIterative(n);
-				}
-			}
-			//Remove
-			else {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.removeLinkedListIterative(n);
-				}
-			}
-			break;
-		//Recursive
-		case 1:
-			//Add
-			if (mode == 0) {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.addLinkedListRecursive(n,tournament.getFirst());
-				}
-			}
-			
-			//Search
-			else if (mode == 1) {
-				for (int i = 0; i < elements; i++) {
-
-					long n = tournament.generateRandomLong(r);
-					tournament.searchLinkedListRecursive(n,tournament.getFirst());
-				}
-			}
-			
-			//Remove
-			else {
-				for (int i = 0; i < elements; i++) {
-					
-					long n = tournament.generateRandomLong(r);
-					tournament.removeLinkedListRecursive(n,tournament.getFirst());
-				}
-			}
-			break;
-		}
-		
-		Platform.runLater(new Thread() {
-
-			public void run () {
-				tournamentGUI.updateFinalListTime();
-			}
-		});
-		
 		try {
+			switch (category) {
+			//Iterative
+			case 0:
+				//Add
+				if (mode == 0) {
+
+					for (int i = 0; i < elements; i++) {
+						long n = tournament.generateRandomLong(r);
+						tournament.addLinkedListIterative(n);
+					}
+				}
+				//Search
+				else if (mode == 1) {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.searchLinkedListIterative(n);
+					}
+				}
+				//Remove
+				else {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.removeLinkedListIterative(n);
+					}
+				}
+				break;
+				//Recursive
+			case 1:
+				//Add
+				if (mode == 0) {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.addLinkedListRecursive(n,tournament.getFirst());
+					}
+				}
+
+				//Search
+				else if (mode == 1) {
+					for (int i = 0; i < elements; i++) {
+
+						long n = tournament.generateRandomLong(r);
+						tournament.searchLinkedListRecursive(n,tournament.getFirst());
+					}
+				}
+
+				//Remove
+				else {
+					
+					for (int i = 0; i < elements; i++) {
+						long n = tournament.generateRandomLong(r);
+						tournament.removeLinkedListRecursive(n,tournament.getFirst());
+					}
+				}
+				break;
+			}
+
+			Platform.runLater(new Thread() {
+
+				public void run () {
+					tournamentGUI.updateFinalListTime();
+				}
+			});
+
 			Thread.sleep(1);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (StackOverflowError soe) {
-			tournamentGUI.getListTimer().setText("DISQUALIFIED");
+			Platform.runLater(new Thread() {
+				
+				@Override
+				public void run () {
+					tournamentGUI.getListTimer().setText("DISQUALIFIED");
+				}
+			});
 		}
 	}
 
@@ -112,7 +118,7 @@ public class ListThread extends Thread{
 	public int getMode() {
 		return mode;
 	}
-	
+
 	public int getElements() {
 		return elements;
 	}

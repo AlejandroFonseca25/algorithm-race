@@ -1,5 +1,6 @@
 package threads;
 
+import javafx.application.Platform;
 import model.AnimationManager;
 import model.Tournament;
 import ui.TournamentGUI;
@@ -87,6 +88,15 @@ public class ThreadManager extends Thread{
     		tGUI.getTimerThread().start();
     		tGUI.getCircleThread().start();
     	}
+    	else {
+    		Platform.runLater(new Thread() {
+
+    			public void run () {
+    				tGUI.setTimerLoading();
+    			}
+    		});
+    	}
+	
     	treeThread.start();
     	listThread.start();
     	arrayThread.start();
@@ -114,6 +124,7 @@ public class ThreadManager extends Thread{
 
 	public void initiateSearchIterative () throws InterruptedException {
 		initiateAddIterative(false);
+		resetAnimations();
     	
 		treeThread = new TreeThread (t, tGUI, 0, 1, elements, seed);
 		listThread = new ListThread (t, tGUI, 0, 1, elements, seed);
@@ -123,15 +134,17 @@ public class ThreadManager extends Thread{
 		listThread.setDaemon(true);
 		arrayThread.setDaemon(true);
 		
+		tGUI.getTimerThread().start();
+		tGUI.getCircleThread().start();
 		treeThread.start();
 		listThread.start();
 		arrayThread.start();	
-		tGUI.getTimerThread().start();
-		tGUI.getCircleThread().start();
+
 	}
 	
 	public void initiateSearchRecursive () throws InterruptedException {
 		initiateAddIterative(false);
+		resetAnimations();
 
 		treeThread = new TreeThread (t, tGUI, 1, 1, elements, seed);
 		listThread = new ListThread (t, tGUI, 1, 1, elements, seed);
@@ -150,6 +163,7 @@ public class ThreadManager extends Thread{
 	
 	public void initiateRemoveIterative () throws InterruptedException {
 		initiateAddIterative(false);
+		resetAnimations();
 
 		treeThread = new TreeThread (t, tGUI, 0, 2, elements, seed);
 		listThread = new ListThread (t, tGUI, 0, 2, elements, seed);
@@ -168,6 +182,7 @@ public class ThreadManager extends Thread{
 	
 	public void initiateRemoveRecursive () throws InterruptedException {
 		initiateAddIterative(false);
+		resetAnimations();
 
 		treeThread = new TreeThread (t, tGUI, 1, 2, elements, seed);
 		listThread = new ListThread (t, tGUI, 1, 2, elements, seed);
@@ -182,6 +197,15 @@ public class ThreadManager extends Thread{
 		treeThread.start();
 		listThread.start();
 		arrayThread.start();
+	}
+	
+	public void resetAnimations () {
+		Platform.runLater(new Thread () {
+			
+			public void run () {
+				tGUI.resetAnimations();
+			}
+		});
 	}
 
 	public Tournament getT() {

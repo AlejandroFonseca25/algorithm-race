@@ -111,6 +111,17 @@ public class TournamentGUI {
     	treeTimer.setText("--:--:--:--");
     	listTimer.setText("--:--:--:--");
     	arrayTimer.setText("--:--:--:--");
+    	circle0.setRadius(20);
+    	circle1.setRadius(40);
+    	animationManager.getCircles()[0].setRadius(20);
+    	animationManager.getCircles()[1].setRadius(40);
+    }
+    
+    public void setTimerLoading () {
+    	timer.setText("Loading");
+    	treeTimer.setText("Loading");
+    	listTimer.setText("Loading");
+    	arrayTimer.setText("Loading");
     }
     
     public void initializeAnimationManager () {
@@ -202,15 +213,15 @@ public class TournamentGUI {
     }
     
     public void updateFinalTreeTime() {
-    	treeTimer.setText(animationManager.toStringTime());
+    	treeTimer.setText(timer.getText());
     }
     
     public void updateFinalListTime() {
-    	listTimer.setText(animationManager.toStringTime());
+    	listTimer.setText(timer.getText());
     }
     
     public void updateFinalArrayTime() {
-    	arrayTimer.setText(animationManager.toStringTime());
+    	arrayTimer.setText(timer.getText());
     }
 
 	public Label getTreeTimer() {

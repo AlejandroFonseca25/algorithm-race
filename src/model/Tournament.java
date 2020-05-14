@@ -8,13 +8,11 @@ public class Tournament {
 	private ArrayList<Long> arrayList;
 	private TreeItem root;
 	private LinkedListItem first;
-	private boolean z;
 	
 	public Tournament () {
 		arrayList = new ArrayList<Long>();
 		root = null;
 		first = null;
-		z = false;
 	}
 	
 	//The real deal
@@ -157,9 +155,8 @@ public class Tournament {
 				}
 				//Setting new first
 				if (actual == first) {
-					first.setNext(null);
-					first = next;
 					first.setPrev(null);
+					first = next;
 				}
 				removed = true;
 			}
@@ -188,9 +185,8 @@ public class Tournament {
 				}
 				//Setting new first
 				if (actual == first) {
-					first.setNext(null);
-					first = next;
 					first.setPrev(null);
+					first = next;
 				}
 				removed = true;
 			}
@@ -506,11 +502,4 @@ public class Tournament {
 		this.first = first;
 	}
 
-	public boolean isZ() {
-		return z;
-	}
-
-	public void setZ(boolean z) {
-		this.z = z;
-	}
 }

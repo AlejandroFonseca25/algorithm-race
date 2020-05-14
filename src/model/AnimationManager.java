@@ -5,9 +5,6 @@ public class AnimationManager {
 	private CircleModel[] circles;
 	//0 = circle1 (small) , 1 = circle2 (big)
 	
-	private ProgressBarModel[] progressBars;
-	//0 = Team Tree , 1 = Team List , 2 = Team Array
-	
 	private TimeUnit milli;
 
 	private TimeUnit second;
@@ -16,13 +13,15 @@ public class AnimationManager {
 	
 	private TimeUnit hour;
 	
-	public AnimationManager (CircleModel[] cir, ProgressBarModel[] p, TimeUnit[] tim) {
+	private boolean on;
+	
+	public AnimationManager (CircleModel[] cir, TimeUnit[] tim) {
 		circles = cir;
-		progressBars = p;
 		milli = tim[0];
 		second = tim[1];
 		min = tim[2];
 		hour = tim[3];
+		on = false;
 	}
 	
 	public void circleAnimation () {
@@ -55,19 +54,7 @@ public class AnimationManager {
 			min.setUnit(0);
 		}
 	}
-	
-	public void progressBarAnimation (boolean yesTree, boolean yesList, boolean yesArray) {
-		if (yesTree) {
-			progressBars[0].advanceProgress();
-		}
-		if (yesList) {
-			progressBars[1].advanceProgress();
-		}
-		if (yesArray) {
-			progressBars[2].advanceProgress();
-		}
-	}
-	
+
 	public String toStringTime () {
 		String sMilli = ":" + milli.getUnit();
 		String sSecond = ":" + second.getUnit();
@@ -92,10 +79,6 @@ public class AnimationManager {
 		return circles;
 	}
 
-	public ProgressBarModel[] getProgressBars() {
-		return progressBars;
-	}
-
 	public TimeUnit getMilli() {
 		return milli;
 	}
@@ -111,13 +94,9 @@ public class AnimationManager {
 	public TimeUnit getHour() {
 		return hour;
 	}
-
+	
 	public void setCircles(CircleModel[] circles) {
 		this.circles = circles;
-	}
-
-	public void setProgressBars(ProgressBarModel[] progressBars) {
-		this.progressBars = progressBars;
 	}
 
 	public void setMilli(TimeUnit milli) {
@@ -134,5 +113,13 @@ public class AnimationManager {
 
 	public void setHour(TimeUnit hour) {
 		this.hour = hour;
+	}
+
+	public boolean isOn() {
+		return on;
+	}
+
+	public void setOn(boolean on) {
+		this.on = on;
 	}
 }

@@ -7,28 +7,29 @@ import ui.TournamentGUI;
 public class CircleThread extends Thread{
 	
 	private AnimationManager am;
-	private TournamentGUI t;
+	private TournamentGUI tGUI;
+	private ThreadManager tm;
 	
-	public CircleThread (AnimationManager am, TournamentGUI t) {
+	public CircleThread (AnimationManager am, TournamentGUI tGUI, ThreadManager tm) {
 		this.am = am;
-		this.t = t;
+		this.tGUI = tGUI;
+		this.tm = tm;
 	}
-
+	
+	@Override
 	public void run () {
 		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e1) {
-
-			e1.printStackTrace();
-		}
-		while (true) {
+		while (am.isOn()) {
 			am.circleAnimation();
 
 			Platform.runLater(new Thread() {
 
 				public void run () {
-					t.updateTimer();
+					tGUI.updateCircles();
+					if (!tm.getArrayThread().isAlive() && !tm.getTreeThread().isAlive() && 
+							!tm.getListThread().isAlive()) {
+						am.setOn(false);
+					}
 				}
 			});
 

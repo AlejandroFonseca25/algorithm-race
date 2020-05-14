@@ -8,11 +8,13 @@ public class Tournament {
 	private ArrayList<Long> arrayList;
 	private TreeItem root;
 	private LinkedListItem first;
+	private boolean z;
 	
 	public Tournament () {
 		arrayList = new ArrayList<Long>();
 		root = null;
 		first = null;
+		z = false;
 	}
 	
 	//The real deal
@@ -462,6 +464,12 @@ public class Tournament {
         return toString += actual.getNumber() + " ";  
 	}
 	
+	public void reset () {
+		root = null;
+		first = null; 
+		arrayList = new ArrayList<Long>();
+	}
+	
 	//Get Methods
 	public ArrayList<Long> getArrayList() {
 		return arrayList;
@@ -496,5 +504,13 @@ public class Tournament {
 
 	public void setFirst(LinkedListItem first) {
 		this.first = first;
+	}
+
+	public boolean isZ() {
+		return z;
+	}
+
+	public void setZ(boolean z) {
+		this.z = z;
 	}
 }

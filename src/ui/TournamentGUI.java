@@ -1,17 +1,18 @@
 package ui;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
@@ -19,8 +20,12 @@ import model.AnimationManager;
 import model.CircleModel;
 import model.TimeUnit;
 import model.Tournament;
+import threads.ArrayThread;
 import threads.CircleThread;
+import threads.ListThread;
+import threads.ThreadManager;
 import threads.TimerThread;
+import threads.TreeThread;
 
 public class TournamentGUI {
 	
@@ -28,6 +33,18 @@ public class TournamentGUI {
 	
 	private AnimationManager animationManager;
 	
+	private TimerThread timerThread;
+	
+	private CircleThread circleThread;
+	
+	private TreeThread treeThread;
+	
+	private ListThread listThread;
+	
+	private ArrayThread arrayThread;
+	
+	private ThreadManager threadManager;
+
     @FXML
     private TextField boxElementNo;
 
@@ -60,9 +77,6 @@ public class TournamentGUI {
 
     @FXML
     private Label winTeamArray;
-
-    @FXML
-    private ImageView buttonMusic;
     
     @FXML
     private Circle circle0;
@@ -74,14 +88,13 @@ public class TournamentGUI {
     private Label timer;
     
     @FXML
-    private ProgressBar progBarTree;
+    private Label treeTimer;
 
     @FXML
-    private ProgressBar progBarList;
+    private Label listTimer;
 
     @FXML
-    private ProgressBar progBarArray;
-
+    private Label arrayTimer;
     
     @FXML
     private BorderPane mainPane;
@@ -89,32 +102,18 @@ public class TournamentGUI {
     @FXML
     private Pane menuPane;
     
-    @FXML
-    private Pane racePane;
-    
 	public TournamentGUI (Tournament t) {
 		tournament = t;
 	}
-	
-	public void initialize () {
-
-	}
-	
-    @FXML
-    void loadHelpPane(ActionEvent event) {
-
+    
+    public void resetAnimations() {
+    	timer.setText("--:--:--:--");
+    	treeTimer.setText("--:--:--:--");
+    	listTimer.setText("--:--:--:--");
+    	arrayTimer.setText("--:--:--:--");
     }
-
-    @FXML
-    void loadRacePane(ActionEvent event) throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("race-pane.fxml"));
-
-    	fxmlLoader.setController(this);
-    	Parent root = fxmlLoader.load();
-
-    	mainPane.getChildren().clear();
-    	mainPane.setCenter(root);
-    	
+    
+    public void initializeAnimationManager () {
     	CircleModel c0 = new CircleModel(circle0.getRadius(), true);
     	CircleModel c1 = new CircleModel(circle1.getRadius(), true);
     	TimeUnit t0 = new TimeUnit(0);
@@ -122,26 +121,66 @@ public class TournamentGUI {
     	TimeUnit t2 = new TimeUnit(0);
     	TimeUnit t3 = new TimeUnit(0);
     	
-    	
-    	
     	CircleModel[] circles = new CircleModel[] {c0,c1};
     	TimeUnit[] timerUnits = new TimeUnit[] {t0,t1,t2,t3};
-    	animationManager = new AnimationManager (circles, null, timerUnits);
-    	CircleThread ct = new CircleThread(animationManager, this);
-    	ct.setDaemon(true);
     	
-    	TimerThread tt = new TimerThread (animationManager, this);
-    	tt.setDaemon(true);
-    	tt.start();
-    	ct.start();
+    	animationManager = new AnimationManager (circles, timerUnits);
+    	circleThread = new CircleThread(animationManager, this, threadManager);
+    	timerThread = new TimerThread (animationManager, this, threadManager);
+    	circleThread.setDaemon(true);
+    	timerThread.setDaemon(true);
+    }
+    
+    public boolean setup() throws IOException {
+    	boolean alright = true;
+    	
+    	int elements = 0; int category = 0; int mode = 0; long seed = 0;
+
+    	try {
+    		if (boxElementNo.getText() == "") {
+    			throw new NumberFormatException();
+    		}
+    		elements = Integer.valueOf(boxElementNo.getText());
+
+
+
+    		if (radRecursive.isSelected()) {
+    			category = 1;
+    		} 
+
+    		if (radSearch.isSelected()) {
+    			mode = 1;
+    		} else if (radRemove.isSelected()) {
+    			mode = 2;
+    		}
+    		Random r = new Random();
+    		seed = r.nextLong();
+    		
+    		threadManager = new ThreadManager(tournament, this, animationManager, category, mode, elements, seed);
+    		threadManager.setDaemon(true);
+        	initializeAnimationManager();
+        	
+    	} catch (NumberFormatException nfe) {
+    		Alert alert = new Alert(AlertType.WARNING);
+    		alert.setTitle("Woah!");
+    		alert.setHeaderText("Trying to crash the app?");
+    		alert.setContentText("Enter a number in the field!");
+    		alright = false;
+    		alert.showAndWait();
+    	}
+		return alright;
+    }
+    
+    public void startRace () throws IOException, InterruptedException {
+    	boolean alright  = setup();
+    	if (alright) {
+    		resetAnimations();
+    		threadManager.start();
+    	}
     }
 
     @FXML
-    void musicManager(ActionEvent event) {
-    }
-
-    @FXML
-    void loadMenuPane(ActionEvent event) throws IOException {
+    public void loadMenuPane(ActionEvent event) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("menu-pane.fxml"));
 		
     	fxmlLoader.setController(this);
@@ -161,4 +200,56 @@ public class TournamentGUI {
     public void updateTimer () {
     	timer.setText(animationManager.toStringTime());
     }
+    
+    public void updateFinalTreeTime() {
+    	treeTimer.setText(animationManager.toStringTime());
+    }
+    
+    public void updateFinalListTime() {
+    	listTimer.setText(animationManager.toStringTime());
+    }
+    
+    public void updateFinalArrayTime() {
+    	arrayTimer.setText(animationManager.toStringTime());
+    }
+
+	public Label getTreeTimer() {
+		return treeTimer;
+	}
+
+	public Label getListTimer() {
+		return listTimer;
+	}
+
+	public Label getArrayTimer() {
+		return arrayTimer;
+	}
+
+	public TreeThread getTreeThread() {
+		return treeThread;
+	}
+
+	public ListThread getListThread() {
+		return listThread;
+	}
+
+	public ArrayThread getArrayThread() {
+		return arrayThread;
+	}
+
+	public TimerThread getTimerThread() {
+		return timerThread;
+	}
+
+	public void setTimerThread(TimerThread timerThread) {
+		this.timerThread = timerThread;
+	}
+
+	public CircleThread getCircleThread() {
+		return circleThread;
+	}
+
+	public void setCircleThread(CircleThread circleThread) {
+		this.circleThread = circleThread;
+	}
 }

@@ -203,6 +203,32 @@ public class TournamentTest {
 	//Binary Tree tests
 	
 	@Test
+	public void addBinaryTreeIterativeTest() {
+		//First test
+		long[] numbers = setup2();
+		for (int i = 0; i < numbers.length ; i++) {
+			tournament.addBinaryTreeIterative(numbers[i]);
+		}
+		
+		String expectedTree = "-25 30 25 0 75 125 100 50 ";
+		String realTree = tournament.toStringBinaryTreePostorder(tournament.getRoot(), "");
+		
+		Assertions.assertEquals(expectedTree, realTree);
+		
+		//Second test
+		tournament.setRoot(null);
+		numbers = setup1();
+		for (int i = 0; i < numbers.length ; i++) {
+			tournament.addBinaryTreeIterative(numbers[i]);
+		}
+		
+		expectedTree = "10 9 8 7 6 5 4 3 2 1 ";
+		realTree = tournament.toStringBinaryTreePostorder(tournament.getRoot(), "");
+		
+		Assertions.assertEquals(expectedTree, realTree);
+	}
+	
+	@Test
 	public void addBinaryTreeRecursiveTest () {
 		//First test
 		long[] numbers = setup2();
@@ -243,26 +269,52 @@ public class TournamentTest {
 	}
 	
 	@Test
+	public void searchBinaryTreeRecursiveTest () {
+		long[] numbers = setup1();
+		for (int i = 0; i < numbers.length; i++) {
+			tournament.addBinaryTreeRecursive(numbers[i], tournament.getRoot());
+		}
+		
+		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(1, tournament.getRoot()));
+		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(5, tournament.getRoot()));
+		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(10, tournament.getRoot()));
+		Assertions.assertFalse(tournament.searchBinaryTreeRecursive(13, tournament.getRoot()));
+	}
+	
+	@Test
+	public void removeBinaryTreeIterativeTest () {
+		long[] numbers = setup1();
+		for (int i = 0; i < numbers.length; i++) {
+			tournament.addBinaryTreeIterative(numbers[i]);
+		}
+		
+		Assertions.assertTrue(tournament.removeBinaryTreeIterative(1));
+		Assertions.assertFalse(tournament.searchBinaryTreeIterative(1));
+		
+		Assertions.assertTrue(tournament.removeBinaryTreeIterative(5));
+		Assertions.assertFalse(tournament.searchBinaryTreeIterative(5));
+		
+		Assertions.assertTrue(tournament.removeBinaryTreeIterative(10));
+		Assertions.assertFalse(tournament.searchBinaryTreeIterative(10));
+		
+		Assertions.assertFalse(tournament.searchBinaryTreeIterative(50));
+	}
+	
+	@Test
 	public void removeBinaryTreeRecursiveTest () {
 		long[] numbers = setup2();
 		for (int i = 0; i < numbers.length ; i++) {
 			tournament.addBinaryTreeRecursive(numbers[i], tournament.getRoot());
 		}
-		
-		Assertions.assertFalse(tournament.searchBinaryTreeRecursive(13, tournament.getRoot()));
-		Assertions.assertFalse(tournament.removeBinaryTreeRecursive(13, tournament.getRoot()));
-		
-		
-		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(50, tournament.getRoot()));
 		Assertions.assertTrue(tournament.removeBinaryTreeRecursive(50, tournament.getRoot()));
 		Assertions.assertFalse(tournament.searchBinaryTreeRecursive(50, tournament.getRoot()));
 		
-		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(25, tournament.getRoot()));
 		Assertions.assertTrue(tournament.removeBinaryTreeRecursive(25, tournament.getRoot()));
 		Assertions.assertFalse(tournament.searchBinaryTreeRecursive(25, tournament.getRoot()));
 		
-		Assertions.assertTrue(tournament.searchBinaryTreeRecursive(-25, tournament.getRoot()));
 		Assertions.assertTrue(tournament.removeBinaryTreeRecursive(-25, tournament.getRoot()));
 		Assertions.assertFalse(tournament.searchBinaryTreeRecursive(-25, tournament.getRoot()));
+		
+		Assertions.assertFalse(tournament.removeBinaryTreeRecursive(13, tournament.getRoot()));
 	}
 }
